@@ -74,12 +74,14 @@ app.get('/api/content', async (req, res) => {
     const [sections] = await db.execute('SELECT * FROM sections');
     const [faqs] = await db.execute('SELECT * FROM faqs ORDER BY sort_order');
     const [products] = await db.execute('SELECT * FROM products ORDER BY sort_order');
+    const [news] = await db.execute('SELECT * FROM news ORDER BY sort_order ASC, created_at DESC');
 
     res.json({
       settings: settings[0],
       sections: sections.reduce((acc, s) => ({ ...acc, [s.name]: s }), {}),
       faqs,
-      products
+      products,
+      news
     });
   } catch (err) {
     console.error(err);
@@ -144,6 +146,44 @@ app.post('/api/admin/products', async (req, res) => {
       );
     }
     res.json({ message: 'Products updated' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// News Admin CRUD Endpoints
+app.post('/api/admin/news', async (req, res) => {
+  const { title, category, content, image_url, sort_order } = req.body;
+  try {
+    const [result] = await db.execute(
+      'INSERT INTO news (title, category, content, image_url, sort_order) VALUES (?, ?, ?, ?, ?)',
+      [title, category, content, image_url || null, sort_order || 0]
+    );
+    res.json({ message: 'News added', id: result.insertId });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put('/api/admin/news/:id', async (req, res) => {
+  const { id } = req.params;
+  const { title, category, content, image_url, sort_order } = req.body;
+  try {
+    await db.execute(
+      'UPDATE news SET title=?, category=?, content=?, image_url=?, sort_order=? WHERE id=?',
+      [title, category, content, image_url || null, sort_order || 0, id]
+    );
+    res.json({ message: 'News updated' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete('/api/admin/news/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await db.execute('DELETE FROM news WHERE id=?', [id]);
+    res.json({ message: 'News deleted' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

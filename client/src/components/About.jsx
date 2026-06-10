@@ -9,7 +9,7 @@ const About = ({ content }) => {
   ];
 
   return (
-    <section id="about" className="py-24 bg-white overflow-hidden">
+    <section id="about" className="py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main 2-column layout */}
@@ -28,11 +28,11 @@ const About = ({ content }) => {
               </span>
             </div>
 
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#00529C] leading-tight mb-6">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
               {content?.title || 'Mewujudkan Kesejahteraan Anggota Koperasi'}
             </h3>
 
-            <p className="text-slate-600 text-lg leading-relaxed mb-8">
+            <p className="text-white/80 text-lg leading-relaxed mb-8">
               {content?.content || 'KMMA merupakan koperasi modern yang berfokus pada kesejahteraan anggota melalui teknologi digital. Kami berkomitmen memberikan solusi finansial yang cerdas dan inklusif.'}
             </p>
 
@@ -47,19 +47,19 @@ const About = ({ content }) => {
                   transition={{ delay: index * 0.1 + 0.3 }}
                   className="text-center"
                 >
-                  <div className="text-3xl md:text-4xl font-black text-[#00529C] mb-1">{stat.value}</div>
-                  <div className="text-slate-500 text-sm font-medium">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-black text-[#4CAF50] mb-1">{stat.value}</div>
+                  <div className="text-white/60 text-sm font-medium">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
 
             <a 
               href="#products" 
-              className="inline-flex items-center gap-3 text-[#00529C] font-bold text-base hover:gap-5 transition-all group"
+              className="inline-flex items-center gap-3 text-white font-bold text-base hover:gap-5 transition-all group"
             >
               Lihat Selengkapnya
-              <div className="w-10 h-10 bg-[#00529C] rounded-full flex items-center justify-center group-hover:bg-[#4CAF50] transition-colors">
-                <HiArrowRight className="text-white" size={18} />
+              <div className="w-10 h-10 bg-[#4CAF50] rounded-full flex items-center justify-center group-hover:bg-white group-hover:text-[#4CAF50] transition-colors">
+                <HiArrowRight className="text-current" size={18} />
               </div>
             </a>
           </motion.div>
@@ -84,12 +84,12 @@ const About = ({ content }) => {
               />
               {/* Overlay card at bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="bg-white/95 backdrop-blur-xl rounded-2xl p-5 shadow-lg border border-white/50">
+                <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-5 shadow-lg border border-white/20">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-[#4CAF50] rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0">✓</div>
                     <div>
-                      <p className="text-[#00529C] font-bold text-base">Koperasi Modern Berbasis Digital</p>
-                      <p className="text-slate-500 text-sm">Melayani anggota dengan teknologi terkini</p>
+                      <p className="text-white font-bold text-base">Koperasi Modern Berbasis Digital</p>
+                      <p className="text-white/60 text-sm">Melayani anggota dengan teknologi terkini</p>
                     </div>
                   </div>
                 </div>

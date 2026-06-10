@@ -8,7 +8,7 @@ const Footer = ({ settings }) => {
       {/* Floating CTA Card Removed for Informational Mode */}
 
       {/* Main Footer */}
-      <div className="bg-[#0a1628] text-white pt-32 pb-10">
+      <div className="text-white pt-32 pb-10" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             {/* Brand */}
@@ -40,6 +40,7 @@ const Footer = ({ settings }) => {
               <ul className="space-y-3 text-slate-400 text-sm">
                 <li><Link to="/" className="hover:text-[#4CAF50] transition-colors">Home</Link></li>
                 <li><Link to="/tentang-kami" className="hover:text-[#4CAF50] transition-colors">Tentang Kami</Link></li>
+                <li><a href="/#news" className="hover:text-[#4CAF50] transition-colors">Berita</a></li>
                 <li><a href="/#products" className="hover:text-[#4CAF50] transition-colors">Produk</a></li>
                 <li><a href="/#faq" className="hover:text-[#4CAF50] transition-colors">FAQ</a></li>
                 <li><a href="/#contact" className="hover:text-[#4CAF50] transition-colors">Hubungi Kami</a></li>

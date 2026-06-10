@@ -4,7 +4,7 @@ import { HiArrowRight } from 'react-icons/hi2';
 
 const Products = ({ products, content }) => {
   const displayProducts = products || [];
-  const [activeCategory, setActiveCategory] = useState('produk');
+  const [activeCategory, setActiveCategory] = useState('layanan');
 
   // Group products by category
   const produkFisik = displayProducts.filter(p => !p.category || p.category === 'produk');
@@ -13,7 +13,7 @@ const Products = ({ products, content }) => {
   const activeProducts = activeCategory === 'produk' ? produkFisik : layananPembiayaan;
 
   return (
-    <section id="products" className="py-24 bg-slate-50">
+    <section id="products" className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 40%, #003a1a 75%, #004d22 100%)'}}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -24,12 +24,12 @@ const Products = ({ products, content }) => {
             viewport={{ once: true }}
             className="max-w-2xl"
           >
-            <div className="inline-block bg-[#4CAF50]/10 border border-[#4CAF50]/20 rounded-full px-5 py-2 mb-6">
+            <div className="inline-block bg-[#4CAF50]/20 border border-[#4CAF50]/40 rounded-full px-5 py-2 mb-6">
               <span className="text-[#4CAF50] text-sm font-bold tracking-wider uppercase">
                 {content?.subtitle || 'Produk & Layanan'}
               </span>
             </div>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#00529C] leading-tight">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
               {content?.title || 'Kami memfasilitasi hari ini untuk langkah cepat esok hari'}
             </h3>
           </motion.div>
@@ -39,7 +39,7 @@ const Products = ({ products, content }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-slate-600 max-w-md text-base leading-relaxed md:pb-2"
+            className="text-white/70 max-w-md text-base leading-relaxed md:pb-2"
           >
             Temukan solusi simpanan dan pinjaman yang sesuai dengan kebutuhan Anda di koperasi kami.
           </motion.p>
@@ -51,8 +51,8 @@ const Products = ({ products, content }) => {
             onClick={() => setActiveCategory('produk')}
             className={`px-8 py-3 rounded-full font-bold text-sm tracking-wider transition-all duration-300 border-2 ${
               activeCategory === 'produk' 
-                ? 'bg-[#00529C] text-white border-[#00529C] shadow-lg shadow-blue-900/20' 
-                : 'bg-white text-[#00529C] border-[#00529C]/20 hover:border-[#00529C]/50'
+                ? 'bg-[#00529C] text-white border-[#00529C] shadow-lg' 
+                : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:border-white/40'
             }`}
           >
             Produk
@@ -61,8 +61,8 @@ const Products = ({ products, content }) => {
             onClick={() => setActiveCategory('layanan')}
             className={`px-8 py-3 rounded-full font-bold text-sm tracking-wider transition-all duration-300 border-2 ${
               activeCategory === 'layanan' 
-                ? 'bg-[#00529C] text-white border-[#00529C] shadow-lg shadow-blue-900/20' 
-                : 'bg-white text-[#00529C] border-[#00529C]/20 hover:border-[#00529C]/50'
+                ? 'bg-[#4CAF50] text-white border-[#4CAF50] shadow-lg' 
+                : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20 hover:border-white/40'
             }`}
           >
             Layanan Pembiayaan

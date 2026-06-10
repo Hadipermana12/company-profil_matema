@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, Navigate } from 'react-router-dom';
 
 // Components
 import Navbar from './components/Navbar';
@@ -9,6 +9,7 @@ import Products from './components/Products';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import News from './components/News';
 
 // Pages
 import TentangKami from './pages/TentangKami';
@@ -22,7 +23,7 @@ import Login from './admin/Login';
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('adminToken');
   if (!token) {
-    return <Login />;
+    return <Navigate to="/admin/login" replace />;
   }
   return children;
 };
@@ -45,6 +46,21 @@ const PublicLayout = () => {
       });
   }, []);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [location]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -57,7 +73,7 @@ const PublicLayout = () => {
   }
 
   return (
-    <div className="bg-white min-h-screen text-slate-800">
+    <div className="min-h-screen text-slate-800">
       <Navbar settings={content?.settings} />
       {/* We pass content down to the rendered child route via Outlet context or cloneElement, but since it's simpler, we can just use Outlet context */}
       <Outlet context={{ content }} />
@@ -74,6 +90,7 @@ const HomePage = () => {
     <>
       <Hero content={content?.sections?.hero} settings={content?.settings} />
       <Products products={content?.products} content={content?.sections?.products} />
+      <News news={content?.news} />
       <FAQ faqs={content?.faqs} />
       <Contact settings={content?.settings} />
     </>
