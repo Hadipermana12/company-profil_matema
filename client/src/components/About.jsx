@@ -13,7 +13,7 @@ const About = ({ content }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main 2-column layout */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Left — Text Content */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -28,7 +28,7 @@ const About = ({ content }) => {
               </span>
             </div>
 
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-5 md:mb-6">
               {content?.title || 'Mewujudkan Kesejahteraan Anggota Koperasi'}
             </h3>
 
@@ -37,7 +37,7 @@ const About = ({ content }) => {
             </p>
 
             {/* Stats row */}
-            <div className="flex gap-8 mb-10">
+            <div className="flex flex-wrap gap-6 md:gap-8 mb-10">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -76,11 +76,11 @@ const About = ({ content }) => {
             <div className="absolute -top-6 -right-6 w-full h-full bg-[#4CAF50]/10 rounded-3xl -z-10" />
             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#00529C]/10 rounded-3xl -z-10" />
             
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-300/50">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-slate-900/50">
               <img 
                 src={content?.image_url || "https://images.unsplash.com/photo-1600880212340-053459a11210?auto=format&fit=crop&q=80&w=1000"} 
                 alt="Tentang Kami" 
-                className="w-full h-[480px] object-cover"
+                className="w-full h-[300px] sm:h-[380px] md:h-[480px] object-cover"
               />
               {/* Overlay card at bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-6">

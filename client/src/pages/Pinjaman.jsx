@@ -6,7 +6,7 @@ const Pinjaman = ({ content }) => {
   const layananProducts = content?.products?.filter(p => p.category === 'layanan') || [];
 
   return (
-    <div className="pt-32 pb-24 min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+    <div className="pt-20 sm:pt-24 lg:pt-32 pb-16 md:pb-24 min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#00529C]/20 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#4CAF50]/12 blur-[120px] pointer-events-none" />
@@ -15,7 +15,7 @@ const Pinjaman = ({ content }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-16 md:mb-24">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -26,18 +26,18 @@ const Pinjaman = ({ content }) => {
                 {pinjaman?.subtitle || 'Layanan Pembiayaan'}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 md:mb-8 leading-tight">
               {pinjaman?.title || 'Solusi Pembiayaan'}{' '}
               <span className="text-[#4CAF50]">Cepat & Aman</span>
             </h1>
             <div className="text-white/75 whitespace-pre-wrap mb-8 leading-relaxed text-lg">
-              {pinjaman?.content || 'Kami menyediakan berbagai jenis fasilitas pinjaman dengan proses yang transparan, bunga kompetitif, dan persyaratan yang mudah untuk mendukung kebutuhan finansial Anda.'}
+              {pinjaman?.content || 'Kami menyediakan berbagai jenis fasilitas pembiayaan dengan proses yang transparan, margin kompetitif, dan persyaratan yang mudah untuk mendukung kebutuhan finansial Anda.'}
             </div>
             <a 
-              href="#daftar-pinjaman"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#00529C] to-[#4CAF50] text-white rounded-full font-bold text-base hover:opacity-90 transition-all hover:-translate-y-1 shadow-lg"
+              href="#daftar-pembiayaan"
+              className="inline-flex items-center gap-3 px-6 md:px-8 py-3.5 md:py-4 bg-gradient-to-r from-[#00529C] to-[#4CAF50] text-white rounded-full font-bold text-sm md:text-base hover:opacity-90 transition-all hover:-translate-y-1 shadow-lg"
             >
-              Lihat Produk Pinjaman
+              Lihat Produk Pembiayaan
               <HiArrowRight size={18} />
             </a>
           </motion.div>
@@ -49,15 +49,15 @@ const Pinjaman = ({ content }) => {
             className="relative"
           >
             <img 
-              src={pinjaman?.image_url || 'https://placehold.co/800x800/00529C/ffffff?text=Pinjaman+KMMA'} 
-              alt="Pinjaman KMMA"
-              className="w-full h-auto rounded-3xl shadow-2xl object-cover"
+              src={pinjaman?.image_url || 'https://placehold.co/800x800/00529C/ffffff?text=Pembiayaan+KMMA'} 
+              alt="Pembiayaan KMMA"
+              className="w-full max-h-[350px] md:max-h-none h-auto rounded-3xl shadow-2xl object-cover"
             />
           </motion.div>
         </div>
 
         {/* Product List */}
-        <div id="daftar-pinjaman" className="pt-16 border-t border-white/10">
+        <div id="daftar-pembiayaan" className="pt-16 border-t border-white/10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -68,7 +68,7 @@ const Pinjaman = ({ content }) => {
               Produk <span className="text-[#4CAF50]">Pembiayaan Kami</span>
             </h2>
             <p className="text-white/60 max-w-2xl mx-auto">
-              Pilih produk pinjaman yang paling sesuai dengan kebutuhan Anda saat ini.
+              Pilih produk pembiayaan yang paling sesuai dengan kebutuhan Anda saat ini.
             </p>
           </motion.div>
 

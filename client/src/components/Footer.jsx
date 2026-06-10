@@ -8,11 +8,11 @@ const Footer = ({ settings }) => {
       {/* Floating CTA Card Removed for Informational Mode */}
 
       {/* Main Footer */}
-      <div className="text-white pt-32 pb-10" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+      <div className="text-white pt-16 md:pt-24 pb-10" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
             {/* Brand */}
-            <div className="md:col-span-1">
+            <div className="col-span-2 md:col-span-1">
               <div className="flex items-center gap-3 mb-6">
                 {settings?.logo_url ? (
                   <img src={settings.logo_url} alt="Logo" className="h-12 object-contain brightness-0 invert" />
@@ -51,7 +51,7 @@ const Footer = ({ settings }) => {
             <div>
               <h4 className="text-sm font-bold tracking-wider uppercase text-white mb-6">Layanan</h4>
               <ul className="space-y-3 text-slate-400 text-sm">
-                <li><Link to="/pinjaman" className="hover:text-[#4CAF50] transition-colors">Pinjaman</Link></li>
+                <li><Link to="/pembiayaan" className="hover:text-[#4CAF50] transition-colors">Pembiayaan</Link></li>
                 <li><Link to="/beasiswa" className="hover:text-[#4CAF50] transition-colors">Beasiswa</Link></li>
               </ul>
             </div>

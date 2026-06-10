@@ -33,7 +33,7 @@ const Contact = ({ settings }) => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8 mb-10 md:mb-12">
           {/* Phone Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,11 +85,11 @@ const Contact = ({ settings }) => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/8 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/15 shadow-lg max-w-3xl mx-auto"
+          className="bg-white/8 backdrop-blur-sm rounded-2xl md:rounded-3xl p-6 md:p-8 md:p-12 border border-white/15 shadow-lg max-w-3xl mx-auto"
         >
           <h4 className="text-xl font-bold text-white mb-6 text-center">Kirim <span className="text-[#4CAF50]">Pesan</span></h4>
           <form className="space-y-5">
-            <div className="grid md:grid-cols-2 gap-5">
+            <div className="grid sm:grid-cols-2 gap-4 md:gap-5">
               <div>
                 <label className="block text-white/80 text-sm font-bold mb-2">Nama Lengkap</label>
                 <input

@@ -17,7 +17,7 @@ const Products = ({ products, content }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-10 md:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ const Products = ({ products, content }) => {
                 {content?.subtitle || 'Produk & Layanan'}
               </span>
             </div>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
               {content?.title || 'Kami memfasilitasi hari ini untuk langkah cepat esok hari'}
             </h3>
           </motion.div>
@@ -41,12 +41,12 @@ const Products = ({ products, content }) => {
             transition={{ delay: 0.1 }}
             className="text-white/70 max-w-md text-base leading-relaxed md:pb-2"
           >
-            Temukan solusi simpanan dan pinjaman yang sesuai dengan kebutuhan Anda di koperasi kami.
+            Temukan solusi simpanan dan pembiayaan yang sesuai dengan kebutuhan Anda di koperasi kami.
           </motion.p>
         </div>
 
         {/* Category Tabs */}
-        <div className="flex gap-3 mb-12">
+        <div className="flex flex-wrap gap-3 mb-12">
           <button
             onClick={() => setActiveCategory('produk')}
             className={`px-8 py-3 rounded-full font-bold text-sm tracking-wider transition-all duration-300 border-2 ${
@@ -79,7 +79,7 @@ const Products = ({ products, content }) => {
             transition={{ duration: 0.4 }}
           >
             {activeProducts.length > 0 ? (
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 {activeProducts.map((product, index) => (
                   <motion.div
                     key={index}
@@ -89,7 +89,7 @@ const Products = ({ products, content }) => {
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     className="group cursor-pointer"
                   >
-                    <div className="relative bg-white rounded-3xl overflow-hidden shadow-lg shadow-slate-200/80 hover:shadow-xl hover:shadow-slate-300/80 transition-all duration-500 h-full flex flex-col border border-slate-100">
+                    <div className="relative bg-white/8 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/15 shadow-lg hover:bg-white/12 hover:border-[#4CAF50]/30 transition-all duration-500 h-full flex flex-col hover:-translate-y-1">
                       {/* Image Area */}
                       <div className="relative h-56 overflow-hidden">
                         <img 
@@ -115,15 +115,15 @@ const Products = ({ products, content }) => {
 
                       {/* Content */}
                       <div className="p-6 flex-1 flex flex-col">
-                        <p className="text-slate-600 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
+                        <p className="text-white/70 text-sm leading-relaxed mb-6 line-clamp-3 flex-1">
                           {product.description}
                         </p>
 
                         <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                          <span className="text-[#00529C] font-bold text-sm group-hover:text-[#4CAF50] transition-colors">
+                          <span className="text-[#4CAF50] font-bold text-sm group-hover:text-white transition-colors">
                             Lihat Lebih Lanjut
                           </span>
-                          <div className="w-10 h-10 bg-[#00529C] rounded-full flex items-center justify-center group-hover:bg-[#4CAF50] transition-all duration-300 group-hover:translate-x-1">
+                          <div className="w-10 h-10 bg-[#4CAF50] rounded-full flex items-center justify-center group-hover:bg-[#00529C] transition-all duration-300 group-hover:translate-x-1">
                             <HiArrowRight className="text-white" size={18} />
                           </div>
                         </div>
@@ -133,13 +133,13 @@ const Products = ({ products, content }) => {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-white rounded-3xl border border-slate-100">
-                <div className="text-slate-400 text-lg">
+              <div className="text-center py-12 md:py-16 bg-white/5 rounded-3xl border border-white/15">
+                <div className="text-white/40 text-base md:text-lg">
                   {activeCategory === 'produk' 
                     ? 'Belum ada produk yang ditambahkan.' 
                     : 'Belum ada layanan pembiayaan yang ditambahkan.'}
                 </div>
-                <p className="text-slate-400 text-sm mt-2">Tambahkan melalui Admin Panel.</p>
+                <p className="text-white/30 text-sm mt-2">Tambahkan melalui Admin Panel.</p>
               </div>
             )}
           </motion.div>

@@ -33,32 +33,33 @@ const Berita = ({ content }) => {
   };
 
   return (
-    <div className="pt-32 pb-24 bg-white min-h-screen relative overflow-hidden">
+    <div className="pt-20 sm:pt-24 lg:pt-32 pb-16 md:pb-24 min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
       
       {/* Background blobs for aesthetic look */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-10 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-[#00529C]/5 to-transparent blur-[100px]" />
-        <div className="absolute bottom-10 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#4CAF50]/5 to-transparent blur-[100px]" />
+        <div className="absolute top-10 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-bl from-[#4CAF50]/10 to-transparent blur-[100px]" />
+        <div className="absolute bottom-10 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#00529C]/10 to-transparent blur-[100px]" />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:28px_28px]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-block bg-[#00529C]/10 border border-[#00529C]/20 rounded-full px-5 py-2 mb-6">
-              <span className="text-[#00529C] text-sm font-bold tracking-wider uppercase">
+            <div className="inline-block bg-[#4CAF50]/20 border border-[#4CAF50]/40 rounded-full px-5 py-2 mb-6">
+              <span className="text-[#4CAF50] text-sm font-bold tracking-wider uppercase">
                 Berita & Informasi
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-800 mb-6 tracking-tight">
-              Kabar Terbaru <span className="text-[#00529C]">KMMA</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight">
+              Kabar Terbaru <span className="text-[#4CAF50]">KMMA</span>
             </h1>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg leading-relaxed">
+            <p className="text-white/70 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
               Ikuti terus perkembangan, kegiatan sosial, promo produk pembiayaan, dan pengumuman resmi dari Koperasi Astra KMMA.
             </p>
           </motion.div>
@@ -75,10 +76,10 @@ const Berita = ({ content }) => {
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold tracking-wider transition-all uppercase ${
+              className={`px-5 py-2.5 rounded-full text-xs md:text-sm font-bold tracking-wider transition-all uppercase ${
                 selectedCategory === cat
-                  ? 'bg-[#00529C] text-white shadow-lg shadow-blue-900/20 scale-105'
-                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  ? 'bg-[#4CAF50] text-white shadow-lg scale-105'
+                  : 'bg-white/10 text-white/80 border border-white/20 hover:bg-white/20'
               }`}
             >
               {cat}
@@ -102,7 +103,7 @@ const Berita = ({ content }) => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   onClick={() => setSelectedArticle(item)}
-                  className="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-200 shadow-md shadow-slate-100 hover:shadow-xl hover:shadow-slate-200 transition-all duration-300 cursor-pointer flex flex-col h-full hover:-translate-y-1"
+                  className="group bg-white/8 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/15 shadow-md hover:bg-white/12 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full hover:-translate-y-1"
                 >
                   {/* Thumbnail */}
                   <div className="relative h-56 overflow-hidden bg-slate-200 shrink-0">
@@ -140,23 +141,23 @@ const Berita = ({ content }) => {
                         </span>
                       </div>
                       
-                      <h3 className="text-xl font-bold text-slate-800 line-clamp-2 leading-snug mb-3 group-hover:text-[#00529C] transition-colors">
+                      <h3 className="text-base md:text-xl font-bold text-white line-clamp-2 leading-snug mb-3 group-hover:text-[#4CAF50] transition-colors">
                         {item.title}
                       </h3>
                       
-                      <p className="text-slate-500 text-sm leading-relaxed line-clamp-3 mb-6">
+                      <p className="text-white/60 text-xs md:text-sm leading-relaxed line-clamp-3 mb-6">
                         {item.content}
                       </p>
                     </div>
 
-                    <span className="text-[#00529C] text-sm font-bold flex items-center gap-1 group-hover:underline">
+                    <span className="text-[#4CAF50] text-sm font-bold flex items-center gap-1 group-hover:underline">
                       Baca Selengkapnya &rarr;
                     </span>
                   </div>
                 </motion.div>
               ))
             ) : (
-              <div className="col-span-full text-center py-20 bg-slate-50 rounded-3xl border border-slate-100 text-slate-400">
+              <div className="col-span-full text-center py-20 bg-white/5 rounded-3xl border border-white/15 text-white/50">
                 Belum ada berita dalam kategori {selectedCategory}.
               </div>
             )}
@@ -179,7 +180,7 @@ const Berita = ({ content }) => {
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.95, y: 20, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className="bg-white w-full max-w-4xl max-h-[85vh] rounded-[32px] overflow-hidden shadow-2xl flex flex-col border border-slate-100"
+              className="bg-white w-full max-w-4xl max-h-[90vh] sm:max-h-[85vh] rounded-2xl sm:rounded-[32px] overflow-hidden shadow-2xl flex flex-col border border-slate-100"
             >
               {/* Modal Header Actions */}
               <div className="flex justify-between items-center px-8 py-5 border-b border-slate-100 shrink-0 bg-slate-50">

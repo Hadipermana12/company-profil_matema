@@ -50,12 +50,19 @@ const PublicLayout = () => {
 
   useEffect(() => {
     if (location.hash) {
-      const element = document.getElementById(location.hash.substring(1));
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
-      }
+      const targetId = location.hash.substring(1);
+      // Retry up to 20 times (2 seconds total) to wait for element to mount
+      let attempts = 0;
+      const scrollToTarget = () => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else if (attempts < 20) {
+          attempts++;
+          setTimeout(scrollToTarget, 100);
+        }
+      };
+      setTimeout(scrollToTarget, 50);
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -119,7 +126,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="tentang-kami" element={<TentangKamiPage />} />
           <Route path="beasiswa" element={<BeasiswaPage />} />
-          <Route path="pinjaman" element={<PinjamanPage />} />
+          <Route path="pembiayaan" element={<PinjamanPage />} />
         </Route>
         
         <Route path="/admin/login" element={<Login />} />

@@ -239,7 +239,7 @@ const AdminDashboard = () => {
     { id: 'tentang_struktur', label: 'Struktur Organisasi', icon: <HiUser size={20} /> },
     { id: 'beasiswa_page', label: 'Program Beasiswa', icon: <HiPhoto size={20} /> },
     { id: 'beasiswa_pengumuman', label: 'Pengumuman Beasiswa', icon: <HiCheckCircle size={20} /> },
-    { id: 'pinjaman_page', label: 'Program Pinjaman', icon: <HiInboxStack size={20} /> },
+    { id: 'pinjaman_page', label: 'Program Pembiayaan', icon: <HiInboxStack size={20} /> },
     { id: 'news', label: 'Berita & Kegiatan', icon: <HiNewspaper size={20} /> },
   ];
 
@@ -275,15 +275,15 @@ const AdminDashboard = () => {
   );
 
   return (
-    <div className="min-h-screen flex text-white" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+    <div className="min-h-screen flex flex-col lg:flex-row text-white" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
       {/* Sidebar */}
-      <div className="w-72 bg-black/20 backdrop-blur-xl border-r border-white/10 text-white p-6 flex flex-col h-screen shrink-0 sticky top-0 z-20">
+      <div className="w-full lg:w-72 bg-black/20 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-white/10 text-white p-6 flex flex-col lg:h-screen shrink-0 lg:sticky top-0 z-20">
         <h1 className="text-2xl font-black mb-8 flex items-center gap-3 tracking-tight">
           <div className="w-9 h-9 bg-white text-[#00529C] rounded-xl flex items-center justify-center font-bold shadow-md">K</div>
           KMMA Admin
         </h1>
         
-        <nav className="flex-1 space-y-6 overflow-y-auto pr-1">
+        <nav className="flex lg:flex-col gap-2 lg:gap-6 overflow-x-auto lg:overflow-y-auto lg:pr-1 pb-2 lg:pb-0 scrollbar-hide">
           <div>
             <p className="text-[10px] font-extrabold uppercase text-white/40 tracking-widest mb-3 px-3">Konten Utama</p>
             <div className="space-y-1.5">
@@ -337,12 +337,12 @@ const AdminDashboard = () => {
       </div>
 
       {/* Content */}
-      <div className="flex-1 p-10 overflow-y-auto h-screen">
-        <div className="flex justify-between items-center mb-10">
-          <h2 className="text-3xl font-black text-white tracking-tight">Manajemen <span className="text-[#4CAF50]">{getTabLabel(activeTab)}</span></h2>
+      <div className="flex-1 p-4 md:p-6 lg:p-10 lg:overflow-y-auto lg:h-screen">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 lg:mb-10 gap-4">
+          <h2 className="text-2xl lg:text-3xl font-black text-white tracking-tight">Manajemen <span className="text-[#4CAF50]">{getTabLabel(activeTab)}</span></h2>
         </div>
 
-        <div className="bg-white/10 backdrop-blur-xl rounded-[32px] shadow-2xl p-8 border border-white/20">
+        <div className="bg-white/10 backdrop-blur-xl rounded-[24px] lg:rounded-[32px] shadow-2xl p-5 md:p-8 border border-white/20">
           
           {/* ===== SETTINGS TAB ===== */}
           {activeTab === 'settings' && (
@@ -570,7 +570,7 @@ const AdminDashboard = () => {
                         value={editingNews.title || ''} 
                         onChange={(e) => setEditingNews({ ...editingNews, title: e.target.value })} 
                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white placeholder-white/30" 
-                        placeholder="Contoh: Bunga Pinjaman Spesial..."
+                        placeholder="Contoh: Margin Pembiayaan Spesial..."
                       />
                     </div>
                     <div>

@@ -10,7 +10,7 @@
 
 body {
   margin: 0;
-  background-color: #ffffff;
+  background-color: #001a3d;
   color: #0f172a;
   -webkit-font-smoothing: antialiased;
 }
@@ -21,4 +21,26 @@ html {
 
 * {
   box-sizing: border-box;
+}
+
+/* Hide scrollbar but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Float animation for hero banner image */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Better tap target size on mobile */
+@media (max-width: 768px) {
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
 }

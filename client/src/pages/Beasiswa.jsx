@@ -5,7 +5,7 @@ const Beasiswa = ({ content }) => {
   const pengumuman = content?.sections?.beasiswa_pengumuman;
 
   return (
-    <div className="pt-32 pb-24 min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+    <div className="pt-20 sm:pt-24 lg:pt-32 pb-16 md:pb-24 min-h-screen relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
       {/* Decorative blobs */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#4CAF50]/12 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full bg-[#00529C]/20 blur-[120px] pointer-events-none" />
@@ -24,7 +24,7 @@ const Beasiswa = ({ content }) => {
                 {beasiswa?.subtitle || 'Beasiswa Pendidikan'}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-8 leading-tight">
               {beasiswa?.title || 'Program Beasiswa'}{' '}
               <span className="text-[#4CAF50]">KMMA</span>
             </h1>
