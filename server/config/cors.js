@@ -1,13 +1,11 @@
 const cors = require('cors');
 
-const allowedOrigins = process.env.ALLOWED_ORIGINS 
-  ? process.env.ALLOWED_ORIGINS.split(',') 
+const allowedOrigins = process.env.ALLOWED_ORIGINS
+  ? process.env.ALLOWED_ORIGINS.split(',')
   : [
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'https://kmma.co.id',
-      'https://admin.kmma.co.id'
-    ];
+    'https://kmma.co.id',
+    'https://admin.kmma.co.id'
+  ];
 
 const corsOptions = {
   origin: (origin, callback) => {
