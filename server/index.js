@@ -12,11 +12,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-app.use(cors({
-  origin: ['http://localhost:3000', // React Development
-           'https://kmma-landing-page.vercel.app', // Production
-           'https://www.kmma.co.id'] // Production
-}));
+app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
