@@ -33,9 +33,13 @@ const AdminDashboard = () => {
     e.preventDefault();
     setSaving(true);
     try {
+      const token = localStorage.getItem('adminToken');
       const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/settings`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(content.settings)
       });
       if (res.ok) {
@@ -51,9 +55,13 @@ const AdminDashboard = () => {
   const handleUpdateSection = async (name) => {
     setSaving(true);
     try {
+      const token = localStorage.getItem('adminToken');
       const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/sections/${name}`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(content.sections[name])
       });
       if (res.ok) {
@@ -71,8 +79,12 @@ const AdminDashboard = () => {
     formData.append('image', file);
     try {
       setSaving(true);
+      const token = localStorage.getItem('adminToken');
       const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/upload`, {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData
       });
       const data = await res.json();
@@ -108,9 +120,13 @@ const AdminDashboard = () => {
   const handleSaveFaqs = async () => {
     setSaving(true);
     try {
+      const token = localStorage.getItem('adminToken');
       const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/faqs`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ faqs: content.faqs })
       });
       if (res.ok) {
@@ -137,9 +153,13 @@ const AdminDashboard = () => {
   const handleSaveProducts = async () => {
     setSaving(true);
     try {
+      const token = localStorage.getItem('adminToken');
       const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/products`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ products: content.products })
       });
       if (res.ok) {
@@ -157,6 +177,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     setSaving(true);
     try {
+      const token = localStorage.getItem('adminToken');
       const isNew = !editingNews.id;
       const url = isNew 
         ? `${import.meta.env.VITE_API_URL}/admin/news`
@@ -165,7 +186,10 @@ const AdminDashboard = () => {
       
       const res = await fetch(url, {
         method: method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(editingNews)
       });
       
@@ -206,8 +230,12 @@ const AdminDashboard = () => {
 
     if (confirm.isConfirmed) {
       try {
+        const token = localStorage.getItem('adminToken');
         const res = await fetch(`${import.meta.env.VITE_API_URL}/admin/news/${id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         });
         if (res.ok) {
           setContent({
