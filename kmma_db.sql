@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 05, 2026 at 05:57 AM
+-- Generation Time: Jun 10, 2026 at 08:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -33,6 +33,31 @@ CREATE TABLE `faqs` (
   `answer` text DEFAULT NULL,
   `sort_order` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news`
+--
+
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `category` varchar(50) NOT NULL,
+  `content` text DEFAULT NULL,
+  `image_url` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `sort_order` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `title`, `category`, `content`, `image_url`, `created_at`, `sort_order`) VALUES
+(1, 'Promo Pinjaman Spesial Hari Koperasi: Bunga Ringan Mulai 5%!', 'Promo', 'Menyambut Hari Koperasi Nasional, KMMA menghadirkan program Promo Pinjaman Spesial dengan bunga super ringan mulai dari 5% per tahun untuk seluruh anggota aktif. Program ini dirancang khusus untuk membantu memenuhi kebutuhan pembiayaan modal usaha, renovasi rumah, pendidikan, maupun kebutuhan darurat lainnya.\n\nKeunggulan promo ini:\n- Bunga bersaing mulai 5% efektif per tahun\n- Proses persetujuan cepat (maksimal 3 hari kerja)\n- Jangka waktu pengembalian fleksibel hingga 5 tahun\n- Tanpa potongan biaya administrasi tersembunyi\n\nMasa berlaku promo ini terbatas mulai 1 Juni hingga 31 Juli 2026. Anggota dapat melihat detail informasi produk pada menu Pinjaman dan menghubungi staf admin koperasi untuk panduan pemenuhan dokumen pendukung.', 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80', '2026-06-05 08:06:31', 0),
+(2, 'KMMA Donasi Qurban', 'Kegiatan', 'KMMA berqurban seekor kambing', 'http://localhost:5000/uploads/1780649289785.jpeg', '2026-06-05 08:06:31', 1),
+(3, 'Pengumuman Seleksi Berkas Program Beasiswa KMMA Tahun Ajaran 2026/2027', 'Pengumuman', 'Panitia Seleksi Beasiswa KMMA secara resmi mengumumkan hasil seleksi tahap pertama (berkas administrasi) untuk program Beasiswa Pendidikan Prestasi tahun ajaran 2026/2027.\n\nDari ratusan berkas pendaftaran anak anggota koperasi yang masuk, panitia telah menyaring kandidat terbaik yang dinyatakan berhak melaju ke tahap berikutnya, yaitu wawancara tatap muka. \n\nDaftar nama kandidat yang lolos seleksi berkas dapat langsung diakses secara transparan melalui halaman menu Beasiswa di website resmi ini. Sesi wawancara dijadwalkan akan berlangsung pada tanggal 10-12 Juni 2026 bertempat di kantor pusat KMMA.\n\nBagi para peserta yang dinyatakan lolos berkas, diharapkan untuk mencetak kartu peserta dan membawa dokumen asli rapor/transkrip nilai serta surat rekomendasi saat menghadiri wawancara. Panitia mengucapkan selamat berjuang kepada seluruh kandidat!', 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=80', '2026-06-05 08:06:31', 2);
 
 -- --------------------------------------------------------
 
@@ -147,6 +172,12 @@ ALTER TABLE `faqs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `news`
+--
+ALTER TABLE `news`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -181,6 +212,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `faqs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `news`
+--
+ALTER TABLE `news`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
