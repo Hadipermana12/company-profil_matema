@@ -298,7 +298,7 @@ const AdminDashboard = () => {
     { id: 'tentang_struktur_data', label: 'Bagan Organisasi', icon: <HiUsers size={20} /> },
     { id: 'beasiswa_page', label: 'Program Beasiswa', icon: <HiPhoto size={20} /> },
     { id: 'beasiswa_pengumuman', label: 'Pengumuman Beasiswa', icon: <HiCheckCircle size={20} /> },
-    { id: 'pinjaman_page', label: 'Program Pembiayaan', icon: <HiInboxStack size={20} /> },
+    { id: 'pembiayaan_page', label: 'Program Pembiayaan', icon: <HiInboxStack size={20} /> },
     { id: 'news', label: 'Berita & Kegiatan', icon: <HiNewspaper size={20} /> },
   ];
 
@@ -505,7 +505,7 @@ const AdminDashboard = () => {
           )}
 
           {/* ===== SECTION TABS ===== */}
-          {(['hero', 'about', 'tentang_sejarah', 'tentang_struktur', 'beasiswa_page', 'pinjaman_page', 'beasiswa_pengumuman'].includes(activeTab)) && (
+          {(['hero', 'about', 'tentang_sejarah', 'tentang_struktur', 'beasiswa_page', 'pembiayaan_page', 'beasiswa_pengumuman'].includes(activeTab)) && (
             <div className="space-y-6">
               <div>
                 <label className="block text-sm font-bold text-white/80 mb-2">Title</label>

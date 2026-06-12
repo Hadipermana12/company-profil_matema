@@ -14,7 +14,7 @@ import News from './components/News';
 // Pages
 import TentangKami from './pages/TentangKami';
 import Beasiswa from './pages/Beasiswa';
-import Pinjaman from './pages/Pinjaman';
+import Pembiayaan from './pages/Pembiayaan';
 
 // Admin Components
 import AdminDashboard from './admin/Dashboard';
@@ -113,9 +113,9 @@ const BeasiswaPage = () => {
   const { content } = useOutletContext();
   return <Beasiswa content={content} />;
 };
-const PinjamanPage = () => {
+const PembiayaanPage = () => {
   const { content } = useOutletContext();
-  return <Pinjaman content={content} />;
+  return <Pembiayaan content={content} />;
 };
 
 function App() {
@@ -126,7 +126,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="tentang-kami" element={<TentangKamiPage />} />
           <Route path="beasiswa" element={<BeasiswaPage />} />
-          <Route path="pembiayaan" element={<PinjamanPage />} />
+          <Route path="pembiayaan" element={<PembiayaanPage />} />
         </Route>
         
         <Route path="/admin/login" element={<Login />} />

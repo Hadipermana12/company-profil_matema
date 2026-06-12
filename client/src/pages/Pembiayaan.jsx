@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { HiArrowRight } from 'react-icons/hi2';
 
-const Pinjaman = ({ content }) => {
-  const pinjaman = content?.sections?.pinjaman_page;
+const Pembiayaan = ({ content }) => {
+  const pembiayaan = content?.sections?.pembiayaan_page;
   const layananProducts = content?.products?.filter(p => p.category === 'layanan') || [];
 
   return (
@@ -23,15 +23,15 @@ const Pinjaman = ({ content }) => {
           >
             <div className="inline-block bg-[#4CAF50]/20 border border-[#4CAF50]/40 rounded-full px-5 py-2 mb-6">
               <span className="text-[#4CAF50] text-sm font-bold tracking-wider uppercase">
-                {pinjaman?.subtitle || 'Layanan Pembiayaan'}
+                {pembiayaan?.subtitle || 'Layanan Pembiayaan'}
               </span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 md:mb-8 leading-tight">
-              {pinjaman?.title || 'Solusi Pembiayaan'}{' '}
+              {pembiayaan?.title || 'Solusi Pembiayaan'}{' '}
               <span className="text-[#4CAF50]">Cepat & Aman</span>
             </h1>
             <div className="text-white/75 whitespace-pre-wrap mb-8 leading-relaxed text-lg">
-              {pinjaman?.content || 'Kami menyediakan berbagai jenis fasilitas pembiayaan dengan proses yang transparan, margin kompetitif, dan persyaratan yang mudah untuk mendukung kebutuhan finansial Anda.'}
+              {pembiayaan?.content || 'Kami menyediakan berbagai jenis fasilitas pembiayaan dengan proses yang transparan, margin kompetitif, dan persyaratan yang mudah untuk mendukung kebutuhan finansial Anda.'}
             </div>
             <a 
               href="#daftar-pembiayaan"
@@ -49,7 +49,7 @@ const Pinjaman = ({ content }) => {
             className="relative"
           >
             <img 
-              src={pinjaman?.image_url || 'https://placehold.co/800x800/00529C/ffffff?text=Pembiayaan+KMMA'} 
+              src={pembiayaan?.image_url || 'https://placehold.co/800x800/00529C/ffffff?text=Pembiayaan+KMMA'} 
               alt="Pembiayaan KMMA"
               className="w-full max-h-[350px] md:max-h-none h-auto rounded-3xl shadow-2xl object-cover"
             />
@@ -118,4 +118,4 @@ const Pinjaman = ({ content }) => {
   );
 };
 
-export default Pinjaman;
+export default Pembiayaan;
