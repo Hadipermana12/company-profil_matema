@@ -102,9 +102,10 @@ const News = ({ news }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   exit={{ opacity: 0, scale: 0.9 }}
+                  whileHover={{ y: -5, scale: 1.02 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
                   onClick={() => setSelectedArticle(item)}
-                  className="group bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-md shadow-slate-100 hover:shadow-xl hover:shadow-slate-200 transition-all duration-300 cursor-pointer flex flex-col h-full hover:-translate-y-1"
+                  className="group bg-white/5 backdrop-blur-sm rounded-3xl overflow-hidden border border-white/10 hover:border-[#4CAF50]/30 shadow-lg hover:shadow-[0_10px_30px_rgba(76,175,80,0.15)] transition-all duration-300 cursor-pointer flex flex-col h-full"
                 >
                   {/* Thumbnail */}
                   <div className="relative h-52 overflow-hidden bg-slate-100 shrink-0">
@@ -131,7 +132,7 @@ const News = ({ news }) => {
                   <div className="p-6 flex-1 flex flex-col justify-between">
                     <div>
                       {/* Meta info */}
-                      <div className="flex items-center gap-4 text-[11px] text-slate-400 mb-3">
+                      <div className="flex items-center gap-4 text-[11px] text-white/50 mb-3">
                         <span className="flex items-center gap-1">
                           <HiCalendar size={13} />
                           {formatDate(item.created_at)}
@@ -142,16 +143,16 @@ const News = ({ news }) => {
                         </span>
                       </div>
                       
-                      <h3 className="text-lg font-bold text-slate-800 line-clamp-2 leading-snug mb-3 group-hover:text-[#00529C] transition-colors">
+                      <h3 className="text-lg font-bold text-white line-clamp-2 leading-snug mb-3 group-hover:text-[#4CAF50] transition-colors drop-shadow-sm">
                         {item.title}
                       </h3>
                       
-                      <p className="text-slate-500 text-xs md:text-sm leading-relaxed line-clamp-3 mb-6">
+                      <p className="text-white/70 text-xs md:text-sm leading-relaxed line-clamp-3 mb-6">
                         {item.content}
                       </p>
                     </div>
 
-                    <span className="text-[#00529C] text-sm font-bold flex items-center gap-1 group-hover:underline">
+                    <span className="text-[#4CAF50] text-sm font-bold flex items-center gap-1 group-hover:text-white transition-colors">
                       Baca Selengkapnya &rarr;
                     </span>
                   </div>

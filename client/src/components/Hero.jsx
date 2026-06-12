@@ -1,4 +1,4 @@
-import { HiArrowRight } from 'react-icons/hi2';
+import { HiArrowRight, HiChevronDoubleDown } from 'react-icons/hi2';
 import { FaGooglePlay } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
 import bannerImg from '../assets/banner.png';
@@ -76,6 +76,27 @@ const Hero = ({ content, settings }) => {
           </motion.div>
         </div>
       </div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="absolute bottom-20 lg:bottom-28 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center cursor-pointer group"
+        onClick={() => {
+          const nextSection = document.getElementById('about') || document.getElementById('products');
+          if (nextSection) nextSection.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        <span className="text-white/50 text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-2 group-hover:text-white transition-colors">Scroll</span>
+        <div className="w-6 h-10 sm:w-8 sm:h-12 rounded-full border-2 border-white/20 flex justify-center p-1 bg-white/5 backdrop-blur-sm group-hover:border-[#4CAF50]/50 transition-colors">
+          <motion.div 
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-1.5 h-3 bg-gradient-to-b from-[#00529C] to-[#4CAF50] rounded-full"
+          />
+        </div>
+      </motion.div>
 
       {/* Bottom wave separator */}
       <div className="absolute bottom-0 left-0 right-0">

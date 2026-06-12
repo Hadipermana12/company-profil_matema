@@ -7,7 +7,7 @@ const FAQ = ({ faqs }) => {
   const displayFaqs = faqs || [];
 
   return (
-    <section id="faq" className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #002a5c 0%, #003d75 35%, #004d30 70%, #006640 100%)'}}>
+    <section id="faq" className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #002a5c 0%, #003d75 35%, #004d30 70%, #006640 100%)'}} data-aos="fade-up" data-aos-duration="1000">
       {/* Decorative blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-[#4CAF50]/10 blur-[100px]" />

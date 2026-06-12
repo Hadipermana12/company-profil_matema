@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, Navigate } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import splashLogo from './assets/spalsh-removebg-preview.png';
 
 // Components
 import Navbar from './components/Navbar';
@@ -70,10 +73,40 @@ const PublicLayout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="relative">
-          <div className="w-20 h-20 border-4 border-[#00529C]/20 border-t-[#00529C] rounded-full animate-spin"></div>
-          <div className="absolute inset-0 flex items-center justify-center text-[#00529C] font-bold text-xl">K</div>
+      <div className="min-h-[100svh] flex flex-col items-center justify-center relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+        {/* Decorative background blobs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00529C]/30 rounded-full blur-[100px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#4CAF50]/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] [background-size:28px_28px]" />
+        
+        {/* Main Logo Container */}
+        <div className="relative z-10 flex flex-col items-center">
+          {/* Animated Logo K */}
+          <div className="relative mb-10 group">
+            {/* Glowing backdrop */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00529C] to-[#4CAF50] blur-[40px] rounded-full animate-pulse opacity-70"></div>
+            
+            {/* Main Logo block */}
+            <div className="w-32 h-32 md:w-40 md:h-40 bg-white/10 rounded-[2rem] flex items-center justify-center shadow-[0_0_40px_rgba(76,175,80,0.5)] relative z-10 border border-white/20 p-4 md:p-6 overflow-hidden backdrop-blur-md">
+              <img src={splashLogo} alt="KMMA Logo" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)] animate-pulse" />
+            </div>
+            
+            {/* Outer spinning rings */}
+            <div className="absolute -inset-6 border-2 border-t-[#4CAF50] border-r-transparent border-b-[#00529C] border-l-transparent rounded-[3rem] animate-spin"></div>
+          </div>
+
+          {/* Text KMMA ONE */}
+          <div className="flex flex-col items-center">
+            <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter drop-shadow-2xl mb-3 flex items-center gap-3">
+              KMMA <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4CAF50] to-[#81c784]">ONE</span>
+            </h1>
+            <div className="h-1.5 w-32 bg-gradient-to-r from-[#00529C] via-[#4CAF50] to-[#00529C] rounded-full mb-6 relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/50 w-1/2 rounded-full animate-[translateX_2s_ease-in-out_infinite] translate-x-[-100%]"></div>
+            </div>
+            <p className="text-white/70 font-bold tracking-[0.3em] text-sm uppercase drop-shadow-sm animate-pulse">
+              Memuat Sistem...
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -119,6 +152,14 @@ const PembiayaanPage = () => {
 };
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  }, []);
+
   return (
     <Router>
       <Routes>
