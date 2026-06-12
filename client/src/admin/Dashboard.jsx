@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HiCog8Tooth, HiPhoto, HiSquares2X2, HiChatBubbleLeftRight, HiInboxStack, HiArrowDownOnSquare, HiCheckCircle, HiArrowLeftOnRectangle, HiGlobeAlt, HiTrash, HiPlus, HiUser, HiNewspaper } from 'react-icons/hi2';
+import { HiCog8Tooth, HiPhoto, HiSquares2X2, HiChatBubbleLeftRight, HiInboxStack, HiArrowDownOnSquare, HiCheckCircle, HiArrowLeftOnRectangle, HiGlobeAlt, HiTrash, HiPlus, HiUser, HiUsers, HiNewspaper, HiPhone } from 'react-icons/hi2';
 import Swal from 'sweetalert2';
 
 const AdminDashboard = () => {
@@ -17,6 +17,35 @@ const AdminDashboard = () => {
         setLoading(false);
       });
   }, []);
+
+  const getOrgData = () => {
+    try {
+      const raw = content?.sections?.tentang_struktur_data?.content;
+      if (raw) {
+        return typeof raw === 'string' ? JSON.parse(raw) : raw;
+      }
+    } catch (e) {
+      console.error("Failed to parse org structure content JSON:", e);
+    }
+    return {
+      dewan_penasehat: [],
+      dewan_pengurus: [],
+      dewan_pengawas: [],
+      units: [],
+      retail_sub: { kepala_toko: '', admin: '', kasir: [] }
+    };
+  };
+
+  const updateOrgData = (newOrgData) => {
+    const updatedSections = {
+      ...content.sections,
+      tentang_struktur_data: {
+        ...content.sections.tentang_struktur_data,
+        content: JSON.stringify(newOrgData)
+      }
+    };
+    setContent({ ...content, sections: updatedSections });
+  };
 
   const showSuccessAlert = (title) => {
     Swal.fire({
@@ -260,11 +289,13 @@ const AdminDashboard = () => {
     { id: 'about', label: 'About Us', icon: <HiSquares2X2 size={20} /> },
     { id: 'products', label: 'Products', icon: <HiInboxStack size={20} /> },
     { id: 'faq', label: 'FAQ', icon: <HiChatBubbleLeftRight size={20} /> },
+    { id: 'contact', label: 'Hubungi Kami', icon: <HiPhone size={20} /> },
   ];
 
   const pageTabs = [
     { id: 'tentang_sejarah', label: 'Sejarah', icon: <HiSquares2X2 size={20} /> },
-    { id: 'tentang_struktur', label: 'Struktur Organisasi', icon: <HiUser size={20} /> },
+    { id: 'tentang_struktur', label: 'Info Struktur', icon: <HiUser size={20} /> },
+    { id: 'tentang_struktur_data', label: 'Bagan Organisasi', icon: <HiUsers size={20} /> },
     { id: 'beasiswa_page', label: 'Program Beasiswa', icon: <HiPhoto size={20} /> },
     { id: 'beasiswa_pengumuman', label: 'Pengumuman Beasiswa', icon: <HiCheckCircle size={20} /> },
     { id: 'pinjaman_page', label: 'Program Pembiayaan', icon: <HiInboxStack size={20} /> },
@@ -306,9 +337,18 @@ const AdminDashboard = () => {
     <div className="min-h-screen flex flex-col lg:flex-row text-white" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
       {/* Sidebar */}
       <div className="w-full lg:w-72 bg-black/20 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-white/10 text-white p-6 flex flex-col lg:h-screen shrink-0 lg:sticky top-0 z-20">
-        <h1 className="text-2xl font-black mb-8 flex items-center gap-3 tracking-tight">
-          <div className="w-9 h-9 bg-white text-[#00529C] rounded-xl flex items-center justify-center font-bold shadow-md">K</div>
-          KMMA Admin
+        <h1 className="mb-8 tracking-tight flex items-center">
+          {content?.settings?.logo_url ? (
+            <div className="flex items-center gap-2">
+              <img src={content.settings.logo_url} alt="KMMA Logo" className="h-9 object-contain max-w-[140px]" />
+              <span className="text-xl font-black text-white ml-1">Admin</span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-white text-[#00529C] rounded-xl flex items-center justify-center font-bold shadow-md">K</div>
+              <span className="text-2xl font-black text-white">KMMA Admin</span>
+            </div>
+          )}
         </h1>
         
         <nav className="flex lg:flex-col gap-2 lg:gap-6 overflow-x-auto lg:overflow-y-auto lg:pr-1 pb-2 lg:pb-0 scrollbar-hide">
@@ -417,6 +457,53 @@ const AdminDashboard = () => {
             </form>
           )}
 
+          {/* ===== HUBUNGI KAMI TAB ===== */}
+          {activeTab === 'contact' && (
+            <form onSubmit={handleUpdateSettings} className="space-y-6">
+              <div className="border-b border-white/10 pb-4 mb-6">
+                <p className="text-white/60 text-sm">Kelola informasi kontak koperasi yang ditampilkan pada bagian Hubungi Kami dan Footer.</p>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-white/80 mb-2">Telepon / WhatsApp</label>
+                  <input 
+                    type="text" 
+                    value={content.settings.contact_phone || ''} 
+                    onChange={(e) => setContent({...content, settings: {...content.settings, contact_phone: e.target.value}})} 
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white placeholder-white/30" 
+                    placeholder="Contoh: +62 819 1555 7365"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-white/80 mb-2">Email</label>
+                  <input 
+                    type="email" 
+                    value={content.settings.contact_email || ''} 
+                    onChange={(e) => setContent({...content, settings: {...content.settings, contact_email: e.target.value}})} 
+                    className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white placeholder-white/30" 
+                    placeholder="Contoh: kopkar.mtm@gmail.com"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-white/80 mb-2">Alamat Kantor</label>
+                <textarea 
+                  rows="3" 
+                  value={content.settings.contact_address || ''} 
+                  onChange={(e) => setContent({...content, settings: {...content.settings, contact_address: e.target.value}})} 
+                  className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white placeholder-white/30"
+                  placeholder="Masukkan alamat lengkap kantor..."
+                />
+              </div>
+
+              <button disabled={saving} className="bg-[#4CAF50] text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-[#43a047] transition-all">
+                <HiArrowDownOnSquare size={20} />
+                {saving ? 'Menyimpan...' : 'Simpan Hubungi Kami'}
+              </button>
+            </form>
+          )}
+
           {/* ===== SECTION TABS ===== */}
           {(['hero', 'about', 'tentang_sejarah', 'tentang_struktur', 'beasiswa_page', 'pinjaman_page', 'beasiswa_pengumuman'].includes(activeTab)) && (
             <div className="space-y-6">
@@ -446,6 +533,330 @@ const AdminDashboard = () => {
                 <HiArrowDownOnSquare size={20} />
                 {saving ? 'Saving...' : `Update ${activeTab} Section`}
               </button>
+            </div>
+          )}
+
+          {/* ===== BAGAN ORGANISASI TAB ===== */}
+          {activeTab === 'tentang_struktur_data' && (
+            <div className="space-y-8">
+              <div className="border-b border-white/10 pb-4">
+                <p className="text-white/60 text-sm">Sesuaikan nama dan penanggung jawab di setiap dewan, unit, dan toko.</p>
+              </div>
+
+              {/* 1. Dewan Penasehat */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-[#4CAF50] text-sm">👥 Dewan Penasehat</h4>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const data = getOrgData();
+                      data.dewan_penasehat.push("");
+                      updateOrgData(data);
+                    }}
+                    className="bg-[#4CAF50] hover:bg-[#43a047] text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all"
+                  >
+                    <HiPlus size={14} /> Tambah Penasehat
+                  </button>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {getOrgData().dewan_penasehat.map((name, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="text-xs text-white/50 w-6">#{i+1}</span>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => {
+                          const data = getOrgData();
+                          data.dewan_penasehat[i] = e.target.value;
+                          updateOrgData(data);
+                        }}
+                        className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                        placeholder="Nama Penasehat"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const data = getOrgData();
+                          data.dewan_penasehat.splice(i, 1);
+                          updateOrgData(data);
+                        }}
+                        className="text-red-400 hover:text-red-600 transition-colors p-1"
+                      >
+                        <HiTrash size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 2. Dewan Pengurus */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-[#4CAF50] text-sm">💼 Dewan Pengurus</h4>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const data = getOrgData();
+                      data.dewan_pengurus.push({ role: "", name: "" });
+                      updateOrgData(data);
+                    }}
+                    className="bg-[#4CAF50] hover:bg-[#43a047] text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all"
+                  >
+                    <HiPlus size={14} /> Tambah Pengurus
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {getOrgData().dewan_pengurus.map((member, i) => (
+                    <div key={i} className="grid md:grid-cols-2 gap-4 border-b border-white/5 pb-4 last:border-0 last:pb-0 relative items-end">
+                      <div>
+                        <label className="block text-xs font-bold text-white/60 mb-1">Jabatan #{i+1} (Contoh: Ketua, Sekretaris)</label>
+                        <input
+                          type="text"
+                          value={member.role}
+                          onChange={(e) => {
+                            const data = getOrgData();
+                            data.dewan_pengurus[i].role = e.target.value;
+                            updateOrgData(data);
+                          }}
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                          placeholder="Nama Jabatan"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1">
+                          <label className="block text-xs font-bold text-white/60 mb-1">Nama Anggota Pengurus</label>
+                          <input
+                            type="text"
+                            value={member.name}
+                            onChange={(e) => {
+                              const data = getOrgData();
+                              data.dewan_pengurus[i].name = e.target.value;
+                              updateOrgData(data);
+                            }}
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                            placeholder="Nama Lengkap"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const data = getOrgData();
+                            data.dewan_pengurus.splice(i, 1);
+                            updateOrgData(data);
+                          }}
+                          className="text-red-400 hover:text-red-600 transition-colors p-1 mt-6"
+                        >
+                          <HiTrash size={18} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 3. Dewan Pengawas */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-[#4CAF50] text-sm">🛡️ Dewan Pengawas</h4>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const data = getOrgData();
+                      data.dewan_pengawas.push("");
+                      updateOrgData(data);
+                    }}
+                    className="bg-[#4CAF50] hover:bg-[#43a047] text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all"
+                  >
+                    <HiPlus size={14} /> Tambah Pengawas
+                  </button>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {getOrgData().dewan_pengawas.map((name, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <span className="text-xs text-white/50 w-6">#{i+1}</span>
+                      <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => {
+                          const data = getOrgData();
+                          data.dewan_pengawas[i] = e.target.value;
+                          updateOrgData(data);
+                        }}
+                        className="flex-1 px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                        placeholder="Nama Pengawas"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const data = getOrgData();
+                          data.dewan_pengawas.splice(i, 1);
+                          updateOrgData(data);
+                        }}
+                        className="text-red-400 hover:text-red-600 transition-colors p-1"
+                      >
+                        <HiTrash size={16} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4. Unit-Unit */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                <div className="flex justify-between items-center">
+                  <h4 className="font-bold text-[#4CAF50] text-sm">📊 Unit-Unit Operasional</h4>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const data = getOrgData();
+                      data.units.push({ title: "", name: "" });
+                      updateOrgData(data);
+                    }}
+                    className="bg-[#4CAF50] hover:bg-[#43a047] text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all"
+                  >
+                    <HiPlus size={14} /> Tambah Unit
+                  </button>
+                </div>
+                <div className="space-y-4">
+                  {getOrgData().units.map((unit, i) => (
+                    <div key={i} className="grid md:grid-cols-2 gap-4 border-b border-white/5 pb-4 last:border-0 last:pb-0 relative items-end">
+                      <div>
+                        <label className="block text-xs font-bold text-white/60 mb-1">Nama Unit/Jabatan #{i+1}</label>
+                        <input
+                          type="text"
+                          value={unit.title}
+                          onChange={(e) => {
+                            const data = getOrgData();
+                            data.units[i].title = e.target.value;
+                            updateOrgData(data);
+                          }}
+                          className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm font-semibold"
+                        />
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="flex-1">
+                          <label className="block text-xs font-bold text-white/60 mb-1">Penanggung Jawab</label>
+                          <input
+                            type="text"
+                            value={unit.name}
+                            onChange={(e) => {
+                              const data = getOrgData();
+                              data.units[i].name = e.target.value;
+                              updateOrgData(data);
+                            }}
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                            placeholder="Nama Penanggung Jawab"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const data = getOrgData();
+                            data.units.splice(i, 1);
+                            updateOrgData(data);
+                          }}
+                          className="text-red-400 hover:text-red-600 transition-colors p-1 mt-6"
+                        >
+                          <HiTrash size={18} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* 5. Unit Retail & Commercial (Sublevel) */}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 space-y-4">
+                <h4 className="font-bold text-[#4CAF50] text-sm">🛒 Sub-level Unit Retail & Commercial (Toko)</h4>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-white/80 mb-1">Kepala Toko</label>
+                    <input
+                      type="text"
+                      value={getOrgData().retail_sub.kepala_toko}
+                      onChange={(e) => {
+                        const data = getOrgData();
+                        data.retail_sub.kepala_toko = e.target.value;
+                        updateOrgData(data);
+                      }}
+                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                      placeholder="Nama Kepala Toko"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-white/80 mb-1">Admin Toko</label>
+                    <input
+                      type="text"
+                      value={getOrgData().retail_sub.admin}
+                      onChange={(e) => {
+                        const data = getOrgData();
+                        data.retail_sub.admin = e.target.value;
+                        updateOrgData(data);
+                      }}
+                      className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-sm"
+                      placeholder="Nama Admin"
+                    />
+                  </div>
+                </div>
+
+                <div className="border-t border-white/5 pt-4 space-y-4">
+                  <div className="flex justify-between items-center">
+                    <label className="block text-xs font-bold text-white/80">Kasir Toko</label>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const data = getOrgData();
+                        data.retail_sub.kasir.push("");
+                        updateOrgData(data);
+                      }}
+                      className="bg-[#4CAF50] hover:bg-[#43a047] text-white px-2.5 py-1 rounded-lg text-[11px] font-bold flex items-center gap-1 transition-all"
+                    >
+                      <HiPlus size={12} /> Tambah Kasir
+                    </button>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {getOrgData().retail_sub.kasir.map((name, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => {
+                            const data = getOrgData();
+                            data.retail_sub.kasir[i] = e.target.value;
+                            updateOrgData(data);
+                          }}
+                          className="flex-1 px-3 py-1.5 bg-white/5 border border-white/10 rounded-xl focus:ring-2 focus:ring-[#4CAF50] outline-none text-white text-xs"
+                          placeholder={`Kasir #${i+1}`}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const data = getOrgData();
+                            data.retail_sub.kasir.splice(i, 1);
+                            updateOrgData(data);
+                          }}
+                          className="text-red-400 hover:text-red-600 transition-colors p-1"
+                        >
+                          <HiTrash size={14} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => handleUpdateSection('tentang_struktur_data')}
+                  disabled={saving}
+                  className="bg-[#4CAF50] text-white px-8 py-4 rounded-xl font-bold flex items-center gap-2 hover:bg-[#43a047] transition-all"
+                >
+                  <HiArrowDownOnSquare size={20} />
+                  {saving ? 'Menyimpan...' : 'Simpan Bagan Organisasi'}
+                </button>
+              </div>
             </div>
           )}
 

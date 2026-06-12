@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Contact = ({ settings }) => {
   return (
-    <section id="contact" className="py-24 relative overflow-hidden" style={{background: 'linear-gradient(135deg, #001f4d 0%, #002f70 40%, #003d20 75%, #004d28 100%)'}}>
+    <section id="contact" className="py-24 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #001f4d 0%, #002f70 40%, #003d20 75%, #004d28 100%)' }}>
       {/* Decorative blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-[#00529C]/20 blur-[120px]" />
@@ -46,7 +46,7 @@ const Contact = ({ settings }) => {
               <HiPhone size={26} className="text-white" />
             </div>
             <h4 className="font-bold text-white text-lg mb-2">Telepon</h4>
-            <p className="text-white/60 text-sm">{settings?.contact_phone || '+62 21 1234 5678'}</p>
+            <p className="text-white/60 text-sm">{settings?.contact_phone || '+62 819 1555 7365'}</p>
           </motion.div>
 
           {/* Email Card */}
@@ -61,7 +61,7 @@ const Contact = ({ settings }) => {
               <HiEnvelope size={26} className="text-white" />
             </div>
             <h4 className="font-bold text-white text-lg mb-2">Email</h4>
-            <p className="text-white/60 text-sm">{settings?.contact_email || 'info@kmma.co.id'}</p>
+            <p className="text-white/60 text-sm">{settings?.contact_email || 'kopkar.mtm@gmail.com'}</p>
           </motion.div>
 
           {/* Address Card */}
@@ -76,7 +76,7 @@ const Contact = ({ settings }) => {
               <HiMapPin size={26} className="text-white" />
             </div>
             <h4 className="font-bold text-white text-lg mb-2">Alamat Kantor</h4>
-            <p className="text-white/60 text-sm">{settings?.contact_address || 'Jl. Raya Koperasi No. 123, Jakarta Selatan'}</p>
+            <p className="text-white/60 text-sm">{settings?.contact_address || 'Jl.Jababeka XI Blok H3 No 12, Cikarang Utara,Bekasi,Jawa Barat,Indonesia'}</p>
           </motion.div>
         </div>
 

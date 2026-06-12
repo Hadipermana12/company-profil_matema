@@ -8,7 +8,7 @@ const Footer = ({ settings }) => {
       {/* Floating CTA Card Removed for Informational Mode */}
 
       {/* Main Footer */}
-      <div className="text-white pt-16 md:pt-24 pb-10" style={{background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)'}}>
+      <div className="text-white pt-16 md:pt-24 pb-10" style={{ background: 'linear-gradient(135deg, #001a3d 0%, #002d6b 35%, #003a1a 70%, #004d22 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
             {/* Brand */}
@@ -60,9 +60,9 @@ const Footer = ({ settings }) => {
             <div>
               <h4 className="text-sm font-bold tracking-wider uppercase text-white mb-6">Ada Pertanyaan?</h4>
               <ul className="space-y-3 text-slate-400 text-sm">
-                <li>{settings?.contact_phone || '+62 21 1234 5678'}</li>
-                <li>{settings?.contact_email || 'info@kmma.co.id'}</li>
-                <li className="leading-relaxed">{settings?.contact_address || 'Jl. Raya Koperasi No. 123, Jakarta Selatan'}</li>
+                <li>{settings?.contact_phone || '+62 819 1555 7365'}</li>
+                <li>{settings?.contact_email || 'kopkar.mtm@gmail.com'}</li>
+                <li className="leading-relaxed">{settings?.contact_address || 'Jl.Jababeka XI Blok H3 No 12, Cikarang Utara,Bekasi,Jawa Barat,Indonesia'}</li>
               </ul>
             </div>
           </div>
